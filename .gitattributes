@@ -1,0 +1,6 @@
+*.csv~\# filter=lfs diff=lfs merge=lfs -text
+변경된 filter=lfs diff=lfs merge=lfs -text
+모든 filter=lfs diff=lfs merge=lfs -text
+파일을 filter=lfs diff=lfs merge=lfs -text
+스테이징 filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text

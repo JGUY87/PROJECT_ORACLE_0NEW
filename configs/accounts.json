@@ -1,0 +1,12 @@
+{
+  "bybit": {
+    "api_key": "",
+    "api_secret": "",
+    "testnet": false
+  },
+  "telegram": {
+    "token": "",
+    "chat_id": "",
+    "admins": []
+  }
+}

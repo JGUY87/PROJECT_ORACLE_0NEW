@@ -1,0 +1,30 @@
+{
+  "level": "INFO",
+  "handlers": {
+    "oracle_console": {
+      "class": "logging.StreamHandler",
+      "level": "INFO",
+      "formatter": "oracle_fmt",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "file": "logs/runtime.log",
+  "rotation": "10 MB",
+  "retention": "14 days",
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "oracle_fmt": {
+      "format": "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+    }
+  },
+  "loggers": {
+    "": {
+      "handlers": [
+        "oracle_console"
+      ],
+      "level": "INFO"
+    }
+  },
+  "__oracle_build__": "config-opt-20250816"
+}

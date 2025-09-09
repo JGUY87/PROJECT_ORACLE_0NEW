@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "crypto-trading-bot"
+version = "0.1.0"
+description = "24/7 automated crypto trading bot"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+packages = [
+    { include = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "~3.10"
+
+# 1. 거래소 API 연동 (필수)
+ccxt = "^4.3.40"
+
+# 2. 데이터 분석 및 처리 (필수)
+pandas = "^2.2.2"
+numpy = "^1.23.5"
+
+# 3. 기술적 분석 지표
+pandas-ta = "0.3.14b"
+
+# 4. 고성능 백테스팅
+vectorbt = "^0.28.1"
+
+# 5. 비동기 처리 (실시간 통신)
+aiohttp = "^3.9.5"
+websockets = "^12.0"
+
+# 6. 로깅 및 모니터링
+loguru = "^0.7.2"
+
+# 7. AI/강화학습
+stable-baselines3 = {extras = ["torch"], version = "^2.2.1"}
+gym = "^0.26.2"
+streamlit = "^1.49.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

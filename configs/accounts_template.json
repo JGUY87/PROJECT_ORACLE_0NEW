@@ -1,0 +1,12 @@
+{
+  "bybit": {
+    "api_key": "YOUR_BYBIT_API_KEY",
+    "api_secret": "YOUR_BYBIT_API_SECRET",
+    "account_type": "UNIFIED",
+    "base_coin": "USDT"
+  },
+  "telegram": {
+    "token": "YOUR_TELEGRAM_BOT_TOKEN",
+    "chat_id": "YOUR_CHAT_ID"
+  }
+}

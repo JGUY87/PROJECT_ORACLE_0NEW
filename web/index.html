@@ -1,0 +1,138 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PROJECT_ORACLE_0 — Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-6xl mx-auto p-4 space-y-4">
+    <header class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">📊 PROJECT_ORACLE_0 — 대시보드</h1>
+      <div class="text-sm text-gray-600" id="mode">mode: -</div>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="p-4 bg-white rounded-2xl shadow">
+        <div class="text-xs text-gray-500">전략 / 심볼</div>
+        <div class="text-lg font-semibold" id="strategy">-</div>
+        <div class="text-sm text-gray-500" id="symbol">-</div>
+      </div>
+      <div class="p-4 bg-white rounded-2xl shadow">
+        <div class="text-xs text-gray-500">Equity</div>
+        <div class="text-2xl font-bold" id="equity">-</div>
+      </div>
+      <div class="p-4 bg-white rounded-2xl shadow">
+        <div class="text-xs text-gray-500">잔고(원화 환산)</div>
+        <div class="text-lg font-semibold" id="krw">-</div>
+        <div class="text-xs text-gray-500" id="rate">-</div>
+      </div>
+    </section>
+
+    <section class="p-4 bg-white rounded-2xl shadow">
+      <div class="flex items-center justify-between">
+        <h2 class="font-semibold">누적 수익률</h2>
+        <img src="/api/equity_chart.png" id="eqimg" class="w-full max-w-[640px] mt-2 rounded" alt="equity" />
+      </div>
+    </section>
+
+    <section class="p-4 bg-white rounded-2xl shadow">
+      <h2 class="font-semibold mb-2">최근 주문</h2>
+      <div class="overflow-auto">
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="text-left text-gray-500">
+              <th class="py-1 px-2">시간</th><th class="py-1 px-2">사이드</th><th class="py-1 px-2">심볼</th><th class="py-1 px-2">수량</th><th class="py-1 px-2">ret</th>
+            </tr>
+          </thead>
+          <tbody id="orders"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="p-4 bg-white rounded-2xl shadow">
+      <h2 class="font-semibold mb-2">로그</h2>
+      <pre id="logs" class="text-xs bg-gray-50 p-3 rounded max-h-80 overflow-auto"></pre>
+    </section>
+
+    <section class="p-4 bg-white rounded-2xl shadow">
+      <h2 class="font-semibold mb-2">엔진 제어 (이 프로세스에서 실행)</h2>
+      <div class="flex flex-wrap gap-2">
+        <input id="in_strategy" class="border rounded px-2 py-1" placeholder="전략 (snake_ma)" />
+        <input id="in_symbol" class="border rounded px-2 py-1" placeholder="심볼 (BTCUSDT)" />
+        <button id="btn_run"   class="px-3 py-1 rounded bg-emerald-600 text-white">실행</button>
+        <button id="btn_stop"  class="px-3 py-1 rounded bg-rose-600 text-white">중지</button>
+        <button id="btn_restart" class="px-3 py-1 rounded bg-amber-600 text-white">재시작</button>
+        <button id="btn_switch" class="px-3 py-1 rounded bg-sky-600 text-white">전략 스위치</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">⚠️ 텔레그램 봇에서 이미 엔진이 실행 중이면 중복 실행에 주의하세요.</p>
+    </section>
+  </div>
+
+<script>
+async function jget(url){
+  const r = await fetch(url);
+  return await r.json();
+}
+async function jpost(url, body){
+  const r = await fetch(url,{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body||{})});
+  return await r.json();
+}
+function fmt(n){ try{ return Number(n).toLocaleString(); }catch(e){ return n; } }
+
+async function refresh(){
+  try{
+    const s = await jget('/api/status');
+    document.getElementById('strategy').innerText = s.strategy || '-';
+    document.getElementById('symbol').innerText = s.symbol || '-';
+    document.getElementById('equity').innerText = s.equity ? fmt(s.equity) : '-';
+    document.getElementById('mode').innerText = 'mode: ' + (s.mode || 'none');
+  }catch(e){ console.warn(e); }
+
+  try{
+    const b = await jget('/api/balance');
+    const krw = b.total_krw || 0;
+    const rate = b.usdkrw ? `USD→KRW ${fmt(b.usdkrw)} (${b.rate_source||''})` : '';
+    document.getElementById('krw').innerText = fmt(Math.round(krw)) + ' 원';
+    document.getElementById('rate').innerText = rate;
+  }catch(e){ document.getElementById('rate').innerText = 'balance fetch 실패'; }
+
+  try{
+    const t = await jget('/api/trades?limit=50');
+    const rows = t.rows || [];
+    const tb = document.getElementById('orders');
+    tb.innerHTML = rows.map(r => `<tr class="border-t"><td class="py-1 px-2">${r.ts||''}</td><td class="py-1 px-2">${r.side||''}</td><td class="py-1 px-2">${r.symbol||''}</td><td class="py-1 px-2">${r.qty||''}</td><td class="py-1 px-2 text-gray-500">${r.ret||''}</td></tr>`).join('');
+  }catch(e){ console.warn(e); }
+
+  try{
+    const lg = await jget('/api/logs?limit=120');
+    document.getElementById('logs').innerText = (lg.lines||[]).join('\n');
+  }catch(e){ console.warn(e); }
+
+  // bust cache for chart
+  const eq = document.getElementById('eqimg');
+  eq.src = '/api/equity_chart.png?ts=' + Date.now();
+}
+setInterval(refresh, 5000);
+refresh();
+
+document.getElementById('btn_run').onclick = async () => {
+  const strategy = document.getElementById('in_strategy').value || 'snake_ma';
+  const symbol = document.getElementById('in_symbol').value || 'BTCUSDT';
+  await jpost('/api/run', {strategy, symbol}); await refresh();
+};
+document.getElementById('btn_stop').onclick = async () => { await jpost('/api/stop', {}); await refresh(); };
+document.getElementById('btn_restart').onclick = async () => {
+  const strategy = document.getElementById('in_strategy').value || 'snake_ma';
+  const symbol = document.getElementById('in_symbol').value || 'BTCUSDT';
+  await jpost('/api/restart', {strategy, symbol}); await refresh();
+};
+document.getElementById('btn_switch').onclick = async () => {
+  const strategy = document.getElementById('in_strategy').value || 'snake_ma';
+  await jpost('/api/switch_strategy', {strategy}); await refresh();
+};
+</script>
+</body>
+</html>

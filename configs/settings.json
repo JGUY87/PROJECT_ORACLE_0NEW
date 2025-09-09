@@ -1,0 +1,5 @@
+{
+  "strategy_name": "ppo",
+  "model_path": "outputs/models/default_ppo_20250908-020510/final_model.zip",
+  "strategy_timeframe": "1min"
+}

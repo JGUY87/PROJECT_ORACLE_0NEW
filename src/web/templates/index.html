@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Bot Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f6f8; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px_4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a202c; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+        .status-box { background: #edf2f7; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-around;}
+        .status-item { text-align: center; }
+        .status-item strong { font-size: 1.1em; color: #4a5568; }
+        .status-item span { font-size: 1.2em; font-weight: bold; color: #2d3748; display: block; margin-top: 5px;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background-color: #e2e8f0; }
+        tbody tr:nth-child(odd) { background-color: #f9fafb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📈 Trading Bot Dashboard</h1>
+        
+        <div class="status-box">
+            <div class="status-item"><strong>Running</strong><span id="status-running">{{ status.is_running }}</span></div>
+            <div class="status-item"><strong>Strategy</strong><span id="status-strategy">{{ status.strategy or 'N/A' }}</span></div>
+            <div class="status-item"><strong>Symbol</strong><span id="status-symbol">{{ status.symbol or 'N/A' }}</span></div>
+        </div>
+
+        <h2>📄 Recent Signals</h2>
+        <table id="signals-table">
+            <thead>
+                <tr>
+                    <th>Timestamp (UTC)</th>
+                    <th>Symbol</th>
+                    <th>Strategy</th>
+                    <th>Signal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for signal in signals %}
+                <tr>
+                    <td>{{ signal.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ signal.symbol }}</td>
+                    <td>{{ signal.strategy }}</td>
+                    <td>{{ signal.signal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchAndUpdate() {
+            try {
+                // Fetch status
+                const statusResponse = await fetch('/api/status');
+                const status = await statusResponse.json();
+                document.getElementById('status-running').textContent = status.is_running;
+                document.getElementById('status-strategy').textContent = status.strategy || 'N/A';
+                document.getElementById('status-symbol').textContent = status.symbol || 'N/A';
+
+                // Fetch signals
+                const signalsResponse = await fetch('/api/signals');
+                const signals = await signalsResponse.json();
+                const tbody = document.querySelector('#signals-table tbody');
+                tbody.innerHTML = ''; // Clear existing rows
+                signals.forEach(signal => {
+                    const row = document.createElement('tr');
+                    // Adjust for timezone by creating date as UTC
+                    const timestamp = new Date(signal.timestamp + 'Z').toLocaleString('sv-SE'); // Swedish locale is close to ISO
+                    row.innerHTML = `
+                        <td>${timestamp}</td>
+                        <td>${signal.symbol}</td>
+                        <td>${signal.strategy}</td>
+                        <td>${signal.signal}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Fetch initially and then every 10 seconds
+        fetchAndUpdate();
+        setInterval(fetchAndUpdate, 10000);
+    </script>
+</body>
+</html>

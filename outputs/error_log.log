@@ -1,0 +1,11 @@
+2025-09-07 22:12:59.164 | ERROR    | src.core.model_loader:load_model:133 - ❌ PPO 모델 파일을 찾을 수 없습니다. (fallback 모델도 없음)
+2025-09-07 22:20:20.858 | ERROR    | src.core.model_loader:load_model:133 - ❌ PPO 모델 파일을 찾을 수 없습니다. (fallback 모델도 없음)
+2025-09-07 22:22:55.803 | ERROR    | src.core.model_loader:try_register_env:98 - ❌ Env 등록 실패: No module named 'gym'
+2025-09-07 22:22:57.048 | ERROR    | src.core.model_loader:make_env:107 - ❌ 벡터 환경 생성 실패: Environment `TradingEnv` doesn't exist.
+2025-09-07 22:22:57.049 | ERROR    | src.core.model_loader:load_model:144 - ❌ PPO 환경 생성 실패로 모델 로드 중단
+2025-09-07 22:35:13.283 | ERROR    | src.core.model_loader:make_env:107 - ❌ 벡터 환경 생성 실패: No module named 'gym'
+2025-09-07 22:35:13.284 | ERROR    | src.core.model_loader:load_model:144 - ❌ PPO 환경 생성 실패로 모델 로드 중단
+2025-09-07 22:37:29.558 | ERROR    | src.core.model_loader:make_env:107 - ❌ 벡터 환경 생성 실패: Gym is incompatible with Gymnasium, please update the environment class to `gymnasium.Env`. See https://gymnasium.farama.org/introduction/create_custom_env/ for more info.
+2025-09-07 22:37:29.558 | ERROR    | src.core.model_loader:load_model:144 - ❌ PPO 환경 생성 실패로 모델 로드 중단
+2025-09-07 22:48:32.225 | ERROR    | src.core.model_loader:load_model:153 - ❌ PPO 모델 로딩 에러: No data found in the saved file
+2025-09-08 10:16:00.558 | ERROR    | src.core.model_loader:load_model:153 - ❌ PPO 모델 로딩 에러: No data found in the saved file

@@ -1,0 +1,30 @@
+# Web & API
+fastapi
+uvicorn[standard]
+
+# Telegram Bot
+aiogram
+
+# Database
+asyncpg
+SQLAlchemy
+
+# Exchange APIs
+pybit
+python-dotenv
+ccxt
+
+# Trading & Backtesting
+vectorbt
+pandas
+numpy
+pandas-ta-openbb
+
+# AI/RL - Reinforcement Learning
+stable-baselines3[extra]
+torch
+gymnasium
+
+# Note: Depending on your system (CPU/GPU), you might need a specific version of torch.
+# The line `torch` will install the default CPU version.
+# For NVIDIA GPU support, visit https://pytorch.org/ and install the appropriate version.

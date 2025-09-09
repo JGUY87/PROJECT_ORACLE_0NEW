@@ -1,0 +1,7 @@
+{
+  "strategy_name": "ppo",
+  "strategy_timeframe": "1min",
+  "model_path": "outputs/ppo_model.zip",
+  "timestamp": "2025-09-09 01:00:21",
+  "status": "RUNNING"
+}

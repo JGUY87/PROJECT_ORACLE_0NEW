@@ -1,0 +1,11 @@
+{
+  "strategies": {
+    "wonyotti": {
+      "tp1_r": 0.8
+    }
+  },
+  "wonyotti": {
+    "TP1_R": 0.8
+  },
+  "__oracle_build__": "config-opt-20250816"
+}
