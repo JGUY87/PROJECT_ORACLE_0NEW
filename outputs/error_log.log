@@ -9,3 +9,6 @@
 2025-09-07 22:37:29.558 | ERROR    | src.core.model_loader:load_model:144 - ❌ PPO 환경 생성 실패로 모델 로드 중단
 2025-09-07 22:48:32.225 | ERROR    | src.core.model_loader:load_model:153 - ❌ PPO 모델 로딩 에러: No data found in the saved file
 2025-09-08 10:16:00.558 | ERROR    | src.core.model_loader:load_model:153 - ❌ PPO 모델 로딩 에러: No data found in the saved file
+2025-09-11 17:45:03.208 | ERROR    | src.core.report_utils:log_error:104 - [USDT] 잔고 조회 실패: 'str' object has no attribute 'fetch_balance'
+2025-09-12 03:59:00.375 | ERROR    | src.core.report_utils:log_error:104 - [심볼 조회 실패] bybit GET https://api.bybit.com/v5/market/instruments-info?category=option&baseCoin=ETH
+2025-09-12 06:11:33.375 | ERROR    | src.core.report_utils:log_error:104 - [심볼 조회 실패] bybit GET https://api.bybit.com/v5/asset/coin/query-info?

@@ -4,6 +4,7 @@
 """
 import asyncio
 import logging
+from dotenv import load_dotenv
 from .config.utils import get_telegram_info # get_telegram_info 함수 임포트
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -13,6 +14,7 @@ async def main():
     """
     봇을 설정하고 시작합니다.
     """
+    load_dotenv() # .env 파일에서 환경 변수 로드
     # 기본 로깅 설정
     logging.basicConfig(
         level=logging.INFO,
@@ -34,7 +36,9 @@ async def main():
 
     logging.info("봇이 시작됩니다...")
     # 봇 폴링 시작 (봇의 모든 업데이트 수신 대기)
+    logging.info("Bot polling started...")
     await dp.start_polling(bot)
+    logging.info("Bot polling stopped.")
 
 if __name__ == '__main__':
     try:

@@ -5,7 +5,7 @@
 SQLAlchemy의 선언적 기반(declarative base)을 사용하여 데이터베이스 테이블 구조를 파이썬 클래스로 정의합니다.
 """
 import datetime
-from sqlalchemy import Column, Integer, String, Float, DateTime, func
+from sqlalchemy import Column, Integer, String, Float, DateTime
 from .database import Base
 
 class SignalLog(Base):

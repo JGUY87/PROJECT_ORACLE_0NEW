@@ -1,35 +1,56 @@
-# -*- coding: utf-8 -*- 
-""" >> "C:\Users\HP\AppData\Local\Temp\PROJECT_ORACLE_0_NEW\src\migrations\set_wonyotti_tp1r_0_8.py" && echo src/migrations/set_wonyotti_tp1r_0_8.py >> "C:\Users\HP\AppData\Local\Temp\PROJECT_ORACLE_0_NEW\src\migrations\set_wonyotti_tp1r_0_8.py" && echo - 기존 strategy_overrides.json에 wonyotti.tp1_r=0.8을 병합 추가 >> "C:\Users\HP\AppData\Local\Temp\PROJECT_ORACLE_0_NEW\src\migrations\set_wonyotti_tp1r_0_8.py" && echo """  
-from __future__ import annotations  
-import json  
-from pathlib import Path  
-""  
-# 새로운 프로젝트 구조에 맞게 strategy_overrides.json 경로 설정  
-# src/migrations/set_wonyotti_tp1r_0_8.py 기준:  
-# ../../configs/strategy_overrides.json  
-PATH_TO_OVERRIDES = Path(__file__).parent.parent.parent / "configs" / "strategy_overrides.json"  
-""  
-def migrate():  
-""" >> "C:\Users\HP\AppData\Local\Temp\PROJECT_ORACLE_0_NEW\src\migrations\set_wonyotti_tp1r_0_8.py" && echo strategy_overrides.json 파일을 읽어 wonyotti.tp1_r 값을 0.8로 설정합니다. >> "C:\Users\HP\AppData\Local\Temp\PROJECT_ORACLE_0_NEW\src\migrations\set_wonyotti_tp1r_0_8.py" && echo """  
-data = {} 
-if path.exists():  
-try:  
-data = json.loads(path.read_text(encoding="utf-8"))  
-except Exception:  
-data = {}  
-""  
-if "strategies" not in data or not isinstance(data["strategies"], dict):  
-data["strategies"] = {}  
-""  
-if "wonyotti" not in data["strategies"] or not isinstance(data["strategies"]["wonyotti"], dict):  
-data["strategies"]["wonyotti"] = {}  
-""  
-data["strategies"]["wonyotti"]["tp1_r"] = 0.8  
-""  
-path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8") 
-print("[OK] set wonyotti.tp1_r = 0.8 in", path.as_posix())  
-except Exception as e:  
-print(f"마이그레이션된 strategy_overrides.json 저장 실패: {e}")  
-""  
-if __name__ == "__main__":  
-migrate() 
+# -*- coding: utf-8 -*-
+"""
+기존 strategy_overrides.json에 wonyotti.tp1_r=0.8을 병합 추가
+"""
+import json
+from pathlib import Path
+import logging
+
+# 로거 설정
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# 경로 설정
+OVERRIDES_FILE = Path(__file__).parent.parent / "configs" / "strategy_overrides.json"
+
+def merge_wonyotti_setting():
+    """
+    strategy_overrides.json 파일을 읽어 'wonyotti' 전략에 'tp1_r' 값을 0.8로 설정하거나 업데이트합니다.
+    파일이나 상위 객체가 없으면 새로 생성합니다.
+    """
+    data = {}
+    try:
+        if OVERRIDES_FILE.exists():
+            try:
+                data = json.loads(OVERRIDES_FILE.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                logging.warning(f"경고: '{OVERRIDES_FILE}' 파일이 비어있거나 유효한 JSON이 아닙니다. 새로 생성합니다.")
+                data = {}
+        else:
+            logging.info(f"'{OVERRIDES_FILE}' 파일이 없어 새로 생성합니다.")
+            # Ensure the parent directory exists
+            OVERRIDES_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+
+        # 'strategies' 딕셔너리가 없거나 타입이 올바르지 않으면 초기화
+        if "strategies" not in data or not isinstance(data.get("strategies"), dict):
+            data["strategies"] = {}
+
+        # 'wonyotti' 딕셔너리가 없거나 타입이 올바르지 않으면 초기화
+        if "wonyotti" not in data["strategies"] or not isinstance(data["strategies"].get("wonyotti"), dict):
+            data["strategies"]["wonyotti"] = {}
+
+        # 'tp1_r' 값 설정 또는 업데이트
+        data["strategies"]["wonyotti"]["tp1_r"] = 0.8
+
+        # 변경된 내용을 파일에 쓰기
+        OVERRIDES_FILE.write_text(
+            json.dumps(data, ensure_ascii=False, indent=4),
+            encoding="utf-8"
+        )
+        logging.info(f"성공: '{OVERRIDES_FILE}' 파일에 'wonyotti' 전략의 'tp1_r' 값을 0.8로 설정했습니다.")
+
+    except Exception as e:
+        logging.error(f"'{OVERRIDES_FILE}' 파일 처리 중 오류 발생: {e}", exc_info=True)
+
+if __name__ == "__main__":
+    merge_wonyotti_setting()

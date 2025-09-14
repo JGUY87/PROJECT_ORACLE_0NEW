@@ -13,7 +13,7 @@ import time
 import requests
 import pandas as pd
 import streamlit as st
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 # --- 설정 ---
 API_BASE_URL = os.environ.get("API_BASE", "http://localhost:8000/api")
@@ -102,7 +102,7 @@ while True:
     if trades:
         df = pd.DataFrame(trades)
         # 가독성을 위해 열 순서 재정렬
-        df = df[["ts", "side", "symbol", "qty", "ret"]]
+        df = df[["time", "type", "symbol", "price", "amount", "info"]]
         trades_placeholder.dataframe(df, use_container_width=True, hide_index=True)
     else:
         trades_placeholder.write("거래 내역이 없습니다.")

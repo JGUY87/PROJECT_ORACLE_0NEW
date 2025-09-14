@@ -3,7 +3,7 @@ fastapi
 uvicorn[standard]
 
 # Telegram Bot
-aiogram
+aiogram>=3.0.0
 
 # Database
 asyncpg
@@ -13,6 +13,7 @@ SQLAlchemy
 pybit
 python-dotenv
 ccxt
+loguru
 
 # Trading & Backtesting
 vectorbt

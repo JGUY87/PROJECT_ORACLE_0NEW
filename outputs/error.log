@@ -1,0 +1,669 @@
+2025-09-13 16:50:29.070 | ERROR    | src.engine.main_realtime:main:560 - 메인 실행 중 치명적 오류: name 'main_loop' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x00000268CE114030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x00000268CE0CB370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x00000268CE114030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x00000268CDFB3E20>
+    │       └ <function run at 0x00000268D00EB7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x00000268FFE347B0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x00000268D00FD240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x00000268D01B5E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000268D00FECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000268D005E440>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 556, in main
+    await main_loop(session)
+                    └ ccxt.async_support.bybit()
+
+NameError: name 'main_loop' is not defined
+2025-09-13 17:00:21.584 | ERROR    | src.engine.main_realtime:main:563 - 메인 실행 중 치명적 오류: name 'main_loop' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x00000255827A4030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x000002558275B370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x00000255827A4030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x00000255822F3E20>
+    │       └ <function run at 0x000002558478B7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x00000255B7475B60>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000002558479D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000025584855E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000002558479ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000255846FE440>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 558, in main
+    await main_loop(session)
+                    └ ccxt.async_support.bybit()
+
+NameError: name 'main_loop' is not defined
+2025-09-13 17:04:08.089 | ERROR    | src.engine.main_realtime:main:563 - 메인 실행 중 치명적 오류: name 'main_loop' is not defined
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x000001B32D8E4030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x000001B32D89B370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x000001B32D8E4030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x000001B32D433E20>
+    │       └ <function run at 0x000001B32E2FB7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x000001B3625B5B60>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000001B32E30D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x000001B32F9C5E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001B32E30ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001B32E26E440>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 558, in main
+    await main_loop(session)
+                    └ ccxt.async_support.bybit()
+
+NameError: name 'main_loop' is not defined
+2025-09-14 02:55:05.262 | ERROR    | src.engine.main_realtime:main_loop:652 - 메인 루프에서 예외 발생: write_engine_status() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x000001BA7FF44030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x000001BA7FEFB370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x000001BA7FF44030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x000001BA7FDE3E20>
+    │       └ <function run at 0x000001BA0222B7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x000001BA34EDE1F0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000001BA0223D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x000001BA022F5E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001BA0223ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001BA0219E440>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 683, in main
+    await main_loop(session)
+          │         └ ccxt.async_support.bybit()
+          └ <function main_loop at 0x000001BA30E4D990>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 556, in main_loop
+    write_engine_status("SCANNING", "거래 대상 스캔 중", now_kst_str())
+    │                                             └ <function now_kst_str at 0x000001BA30E4E9E0>
+    └ <function write_engine_status at 0x000001BA30A3EF80>
+
+TypeError: write_engine_status() takes 1 positional argument but 3 were given
+2025-09-14 02:56:05.329 | ERROR    | src.engine.main_realtime:main_loop:652 - 메인 루프에서 예외 발생: write_engine_status() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x000001BA7FF44030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x000001BA7FEFB370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x000001BA7FF44030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x000001BA7FDE3E20>
+    │       └ <function run at 0x000001BA0222B7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x000001BA34EDE1F0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000001BA0223D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x000001BA022F5E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001BA0223ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000001BA0219E440>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<Future finished result=None>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<Future finished result=None>)>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 683, in main
+    await main_loop(session)
+          │         └ ccxt.async_support.bybit()
+          └ <function main_loop at 0x000001BA30E4D990>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 556, in main_loop
+    write_engine_status("SCANNING", "거래 대상 스캔 중", now_kst_str())
+    │                                             └ <function now_kst_str at 0x000001BA30E4E9E0>
+    └ <function write_engine_status at 0x000001BA30A3EF80>
+
+TypeError: write_engine_status() takes 1 positional argument but 3 were given
+2025-09-14 02:56:37.385 | ERROR    | src.engine.main_realtime:main_loop:652 - 메인 루프에서 예외 발생: write_engine_status() takes 1 positional argument but 3 were given
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x000001BA34EDE1F0>
+           │    └ <function BaseEventLoop.run_until_complete at 0x000001BA0223D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x000001BA022F5E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000001BA0223ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1845, in _run_once
+    event_list = self._selector.select(timeout)
+                 │    │         │      └ 0.5160000000032596
+                 │    │         └ <function IocpProactor.select at 0x000001BA022F6290>
+                 │    └ <IocpProactor overlapped#=1 result#=0>
+                 └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 434, in select
+    self._poll(timeout)
+    │    │     └ 0.5160000000032596
+    │    └ <function IocpProactor._poll at 0x000001BA022F6D40>
+    └ <IocpProactor overlapped#=1 result#=0>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 783, in _poll
+    status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
+             │           │                         │    │      └ 517
+             │           │                         │    └ 2692
+             │           │                         └ <IocpProactor overlapped#=1 result#=0>
+             │           └ <built-in function GetQueuedCompletionStatus>
+             └ <module '_overlapped' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\DLLs\\_overlapped.pyd'>
+
+KeyboardInterrupt
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 683, in main
+    await main_loop(session)
+          │         └ ccxt.async_support.bybit()
+          └ <function main_loop at 0x000001BA30E4D990>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 556, in main_loop
+    write_engine_status("SCANNING", "거래 대상 스캔 중", now_kst_str())
+    │                                             └ <function now_kst_str at 0x000001BA30E4E9E0>
+    └ <function write_engine_status at 0x000001BA30A3EF80>
+
+TypeError: write_engine_status() takes 1 positional argument but 3 were given
+2025-09-14 02:58:01.967 | ERROR    | src.engine.main_realtime:main_loop:652 - 메인 루프에서 예외 발생: get_longest_indicator_period() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x0000019410D34030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x0000019410CEB370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x0000019410D34030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x0000019410BD3E20>
+    │       └ <function run at 0x0000019412C5B7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x0000019445942260>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000019412C6D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000019412D25E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000019412C6ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000019412BCE440>
+    └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 683, in main
+    await main_loop(session)
+          │         └ ccxt.async_support.bybit()
+          └ <function main_loop at 0x00000194418B5900>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 569, in main_loop
+    longest_period = get_longest_indicator_period(strategy_name)
+                     │                            └ 'ppo'
+                     └ <function get_longest_indicator_period at 0x000001944149BC70>
+
+TypeError: get_longest_indicator_period() takes 0 positional arguments but 1 was given
+2025-09-14 02:58:26.720 | ERROR    | src.engine.main_realtime:main_loop:652 - 메인 루프에서 예외 발생: get_longest_indicator_period() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object run_all at 0x0000019445942260>
+           │    └ <function BaseEventLoop.run_until_complete at 0x0000019412C6D240>
+           └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000019412D25E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000019412C6ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1845, in _run_once
+    event_list = self._selector.select(timeout)
+                 │    │         │      └ 1.0
+                 │    │         └ <function IocpProactor.select at 0x0000019412D26290>
+                 │    └ <IocpProactor overlapped#=5 result#=0>
+                 └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 434, in select
+    self._poll(timeout)
+    │    │     └ 1.0
+    │    └ <function IocpProactor._poll at 0x0000019412D26D40>
+    └ <IocpProactor overlapped#=5 result#=0>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 783, in _poll
+    status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
+             │           │                         │    │      └ 1000
+             │           │                         │    └ 424
+             │           │                         └ <IocpProactor overlapped#=5 result#=0>
+             │           └ <built-in function GetQueuedCompletionStatus>
+             └ <module '_overlapped' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\DLLs\\_overlapped.pyd'>
+
+KeyboardInterrupt
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+           │         └ <code object <module> at 0x0000019410D34030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+           └ <function _run_code at 0x0000019410CEB370>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'src', '__loader__': <_frozen_importlib_external.SourceFileLoader ob...
+         └ <code object <module> at 0x0000019410D34030, file "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 1>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\main_unified.py", line 29, in <module>
+    asyncio.run(run_all())
+    │       │   └ <function run_all at 0x0000019410BD3E20>
+    │       └ <function run at 0x0000019412C5B7F0>
+    └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+    │                 └ <ProactorEventLoop running=True closed=False debug=False>
+    └ <function _cancel_all_tasks at 0x0000019410F62CB0>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+    │    │                  │     │       └ {<Task pending name='Task-2' coro=<main() running at C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py:683> cb=[ga...
+    │    │                  │     └ <function gather at 0x0000019412C596C0>
+    │    │                  └ <module 'asyncio.tasks' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\tasks.py'>
+    │    └ <function BaseEventLoop.run_until_complete at 0x0000019412C6D240>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 628, in run_until_complete
+    self.run_forever()
+    │    └ <function ProactorEventLoop.run_forever at 0x0000019412D25E10>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 316, in run_forever
+    super().run_forever()
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 595, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000019412C6ECB0>
+    └ <ProactorEventLoop running=True closed=False debug=False>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1881, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000019412BCE440>
+    └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+
+  File "C:\Users\HP\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle Task.task_wakeup(<_GatheringFu..., ...}, ...]]>)>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 683, in main
+    await main_loop(session)
+          │         └ ccxt.async_support.bybit()
+          └ <function main_loop at 0x00000194418B5900>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 569, in main_loop
+    longest_period = get_longest_indicator_period(strategy_name)
+                     │                            └ 'ppo'
+                     └ <function get_longest_indicator_period at 0x000001944149BC70>
+
+TypeError: get_longest_indicator_period() takes 0 positional arguments but 1 was given
+2025-09-14 03:05:01.185 | ERROR    | src.engine.main_realtime:fetch_candles:403 - [ETH/USDT:USDT] 캔들 조회 실패: bybit GET https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear
+Traceback (most recent call last):
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\client_reqrep.py", line 532, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                             │        └ <function DataQueue.read at 0x000001D77E6A52D0>
+                             └ <aiohttp.client_proto.ResponseHandler object at 0x000001D70E4137C0>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\streams.py", line 672, in read
+    await self._waiter
+          │    └ None
+          └ <aiohttp.client_proto.ResponseHandler object at 0x000001D70E4137C0>
+
+asyncio.exceptions.CancelledError
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\base\exchange.py", line 217, in fetch
+    async with session_method(yarl.URL(url, encoded=True),
+               │              │    │   └ 'https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear'
+               │              │    └ <class 'yarl.URL'>
+               │              └ <module 'yarl' from 'C:\\Users\\HP\\PROJECT_ORACLE_0_NEW\\trading_env\\lib\\site-packages\\yarl\\__init__.py'>
+               └ <bound method ClientSession.get of <aiohttp.client.ClientSession object at 0x000001D70F451210>>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\client.py", line 1488, in __aenter__
+    self._resp: _RetType = await self._coro
+    │    │                       │    └ <member '_coro' of '_BaseRequestContextManager' objects>
+    │    │                       └ <aiohttp.client._BaseRequestContextManager object at 0x000001D70A6E5810>
+    │    └ <member '_resp' of '_BaseRequestContextManager' objects>
+    └ <aiohttp.client._BaseRequestContextManager object at 0x000001D70A6E5810>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\client.py", line 770, in _request
+    resp = await handler(req)
+                 │       └ <aiohttp.client_reqrep.ClientRequest object at 0x000001D70A6E7640>
+                 └ <function ClientSession._request.<locals>._connect_and_send_request at 0x000001D70A2C2DD0>
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\client.py", line 748, in _connect_and_send_request
+    await resp.start(conn)
+          │    │     └ Connection<ConnectionKey(host='api.bybit.com', port=443, is_ssl=True, ssl=True, proxy=None, proxy_auth=None, proxy_headers_ha...
+          │    └ <function ClientResponse.start at 0x000001D77E7443A0>
+          └ <ClientResponse(https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear) [None None]>
+            None
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\client_reqrep.py", line 527, in start
+    with self._timer:
+         │    └ <aiohttp.helpers.TimerContext object at 0x000001D712447240>
+         └ <ClientResponse(https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear) [None None]>
+           None
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\aiohttp\helpers.py", line 685, in __exit__
+    raise asyncio.TimeoutError from exc_val
+          │       │                 └ CancelledError()
+          │       └ <class 'asyncio.exceptions.TimeoutError'>
+          └ <module 'asyncio' from 'C:\\Users\\HP\\AppData\\Local\\Programs\\Python\\Python310\\lib\\asyncio\\__init__.py'>
+
+asyncio.exceptions.TimeoutError
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 575, in fetch_and_process
+    df = await fetch_candles(session, symbol, interval=tf, longest_period=longest_period)
+               │             │        │                │                  └ 50
+               │             │        │                └ '1'
+               │             │        └ 'ETH/USDT:USDT'
+               │             └ ccxt.async_support.bybit()
+               └ <function fetch_candles at 0x000001D70A38E3B0>
+
+> File "C:\Users\HP\PROJECT_ORACLE_0_NEW\src\engine\main_realtime.py", line 400, in fetch_candles
+    ohlcv = await session.fetch_ohlcv(symbol, timeframe=ccxt_interval, limit=limit)
+                  │       │           │                 │                    └ 20000
+                  │       │           │                 └ '1m'
+                  │       │           └ 'ETH/USDT:USDT'
+                  │       └ <function bybit.fetch_ohlcv at 0x000001D77EC9BEB0>
+                  └ ccxt.async_support.bybit()
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\bybit.py", line 2554, in fetch_ohlcv
+    response = await self.publicGetV5MarketKline(self.extend(request, params))
+                     │    │                      │    │      │        └ {}
+                     │    │                      │    │      └ {'symbol': 'ETHUSDT', 'limit': 20000, 'interval': '1', 'category': 'linear'}
+                     │    │                      │    └ <staticmethod(<function Exchange.extend at 0x000001D77CED0940>)>
+                     │    │                      └ ccxt.async_support.bybit()
+                     │    └ <function Entry.__init__.<locals>.unbound_method at 0x000001D77D87D630>
+                     └ ccxt.async_support.bybit()
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\base\exchange.py", line 981, in request
+    return await self.fetch2(path, api, method, params, headers, body, config)
+                 │    │      │     │    │       │       │        │     └ {'cost': 5}
+                 │    │      │     │    │       │       │        └ None
+                 │    │      │     │    │       │       └ None
+                 │    │      │     │    │       └ {'symbol': 'ETHUSDT', 'limit': 20000, 'interval': '1', 'category': 'linear'}
+                 │    │      │     │    └ 'GET'
+                 │    │      │     └ 'public'
+                 │    │      └ 'v5/market/kline'
+                 │    └ <function Exchange.fetch2 at 0x000001D77E939750>
+                 └ ccxt.async_support.bybit()
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\base\exchange.py", line 975, in fetch2
+    raise e
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\base\exchange.py", line 966, in fetch2
+    return await self.fetch(request['url'], request['method'], request['headers'], request['body'])
+                 │    │     │               │                  │                   └ {'url': 'https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear', 'method': 'GET', 'body...
+                 │    │     │               │                  └ {'url': 'https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear', 'method': 'GET', 'body...
+                 │    │     │               └ {'url': 'https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear', 'method': 'GET', 'body...
+                 │    │     └ {'url': 'https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear', 'method': 'GET', 'body...
+                 │    └ <function Exchange.fetch at 0x000001D77E931E10>
+                 └ ccxt.async_support.bybit()
+
+  File "C:\Users\HP\PROJECT_ORACLE_0_NEW\trading_env\lib\site-packages\ccxt\async_support\base\exchange.py", line 253, in fetch
+    raise RequestTimeout(details) from e
+          │              └ 'bybit GET https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear'
+          └ <class 'ccxt.base.errors.RequestTimeout'>
+
+ccxt.base.errors.RequestTimeout: bybit GET https://api.bybit.com/v5/market/kline?symbol=ETHUSDT&limit=20000&interval=1&category=linear

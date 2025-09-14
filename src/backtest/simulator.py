@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """간단한 루프 기반 백테스팅 시뮬레이터."""
 from __future__ import annotations
-from typing import Dict, Any, List
+from typing import Dict, Any
 import pandas as pd
 
 def run_simple_backtest(

@@ -4,11 +4,16 @@
 """
 import asyncio
 import logging
+from datetime import datetime, timedelta
 import pandas as pd
 from ..core.clients import get_exchange_client
 from ..core.database import SessionLocal
 from ..core.models import SignalLog
 from .strategies import ma_crossover
+from . import order_helpers
+from . import risk_manager
+from ..notifier.telegram_notifier import send_telegram_message, send_daily_report
+from ..core import ppo_trainer
 
 class TradingEngine:
     _instance = None
@@ -28,6 +33,7 @@ class TradingEngine:
             self.last_symbol = None # 마지막 실행 심볼 저장
             self.main_task = None
             self.client = get_exchange_client()
+            self.last_report_time = None # 마지막 리포트 시간
             self.initialized = True
             logging.info("TradingEngine initialized (Singleton)")
 
@@ -52,8 +58,15 @@ class TradingEngine:
     async def _run_loop(self):
         """메인 트레이딩 로직이 실행되는 비동기 루프"""
         logging.info(f"Engine loop started for {self.current_symbol} with strategy {self.current_strategy}")
+        
+        # 엔진 시작 시 첫 리포트 전송
+        await self._check_and_send_daily_report(force=True)
+
         while self.is_running:
             try:
+                # 0. 일일 리포트 시간 확인
+                await self._check_and_send_daily_report()
+
                 # 1. 데이터 가져오기 (OHLCV)
                 logging.info(f"Fetching OHLCV data for {self.current_symbol}...")
                 ohlcv = await self.client.fetch_ohlcv(self.current_symbol, '1m', limit=100)
@@ -77,17 +90,40 @@ class TradingEngine:
                 # 4. 데이터베이스에 신호 기록
                 self._log_signal_to_db(signal)
 
-                # 5. 신호에 따른 액션 (현재는 로깅만)
-                if signal == 'buy':
-                    logging.info(f"BUY signal detected for {self.current_symbol}. ACTION: Place buy order.")
-                    # TODO: await order_helpers.place_market_order(self.current_symbol, 'buy', 0.01)
-                elif signal == 'sell':
-                    logging.info(f"SELL signal detected for {self.current_symbol}. ACTION: Place sell order.")
-                    # TODO: await order_helpers.place_market_order(self.current_symbol, 'sell', 0.01)
+                # 5. 신호에 따른 액션 및 알림
+                order_result = None
+                if signal in ['buy', 'sell']:
+                    # 5.1. 주문 수량 계산
+                    logging.info(f"Calculating order size for {signal} signal...")
+                    order_size = await risk_manager.calculate_order_size(self.current_symbol, signal)
+
+                    if order_size and order_size > 0:
+                        # 5.2. 주문 실행
+                        logging.info(f"{signal.upper()} signal detected for {self.current_symbol}. ACTION: Place {signal} order of size {order_size:.4f}.")
+                        order_result = await order_helpers.place_market_order(self.current_symbol, signal, order_size)
+                    else:
+                        logging.warning(f"Order size calculation failed or resulted in zero. Skipping order for {signal} signal.")
+                
                 else: # 'hold'
                     logging.info(f"HOLD signal for {self.current_symbol}.")
 
-                # 6. 루프 주기
+                # 6. 주문 결과가 있으면 텔레그램으로 알림
+                if order_result:
+                    side = order_result.get('side', 'N/A').upper()
+                    symbol = order_result.get('symbol', 'N/A')
+                    avg_price = order_result.get('average', 'N/A')
+                    amount = order_result.get('amount', 'N/A')
+                    
+                    message = (
+                        f"✅ 실시간 거래 알림\n\n"
+                        f"📈 종목: {symbol}\n"
+                        f"▶️ 방향: {side}\n"
+                        f"💰 체결가: {avg_price}\n"
+                        f"📦 수량: {amount}"
+                    )
+                    await send_telegram_message(message)
+
+                # 7. 루프 주기
                 await asyncio.sleep(60)  # 1분 대기
 
             except asyncio.CancelledError:
@@ -99,6 +135,21 @@ class TradingEngine:
 
         logging.info("Engine loop has stopped.")
         self.is_running = False
+
+    async def _check_and_send_daily_report(self, force: bool = False):
+        """
+        필요한 경우 일일 리포트를 확인하고 전송합니다.
+        `force=True`이면 시간과 관계없이 리포트를 전송합니다.
+        """
+        now = datetime.utcnow()
+        if force or (self.last_report_time and (now - self.last_report_time) >= timedelta(days=1)):
+            logging.info("일일 리포트를 생성하고 전송합니다...")
+            summary = await risk_manager.get_account_summary()
+            if summary:
+                await send_daily_report(summary)
+                self.last_report_time = now
+            else:
+                logging.error("계좌 요약 정보를 가져오지 못해 리포트를 전송할 수 없습니다.")
 
     def start(self, strategy: str, symbol: str):
         """엔진을 시작합니다."""

@@ -1,0 +1,116 @@
+[
+    {
+        "id": "9c1c4c58-37f5-4793-a761-27a95b6a0f2f",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868712.9922702
+    },
+    {
+        "id": "9541e88b-1347-46c8-9f7e-d4ff6b22b877",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868901.9230764
+    },
+    {
+        "id": "14ff5411-ec11-48ea-8642-a4b16423c0a4",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868925.7042513
+    },
+    {
+        "id": "f9cf29a5-0b05-4e2d-8738-4c91ce8f6705",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868949.4074903
+    },
+    {
+        "id": "81458e9e-9fe8-44ee-a6b8-ec775338693e",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868973.1890008
+    },
+    {
+        "id": "476ce727-a07f-41f4-9624-76ff7059de43",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757868996.8365686
+    },
+    {
+        "id": "f59f029d-4837-4468-9c2c-8ba4da857c4f",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869020.5500176
+    },
+    {
+        "id": "30b8bd4b-8ead-453e-a66b-c8fed4f4ef77",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869044.1596074
+    },
+    {
+        "id": "f2b0e6f1-cb85-4df1-aa4b-9d2842a9516f",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869067.8889654
+    },
+    {
+        "id": "cd7f3b7d-0685-4052-b4db-e1ec4500a1af",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869091.5604584
+    },
+    {
+        "id": "cf2c0b1c-f6c4-4712-911a-492757bd93c6",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869115.211831
+    },
+    {
+        "id": "4f1d5c20-b95c-4eb0-8bcb-b8eb848812f7",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869138.8749259
+    },
+    {
+        "id": "c708b9cf-006c-49cf-888a-2f6a8df52f4e",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869162.5730314
+    },
+    {
+        "id": "5ed61c08-07ae-405e-a59c-fdecba19509d",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757869186.2692816
+    },
+    {
+        "id": "d84b6b77-6ac2-42bf-8ca7-b8afdedf2092",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757873142.7397254
+    },
+    {
+        "id": "774a631d-516d-4849-b571-6d8b2c5b2151",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757873166.5973432
+    },
+    {
+        "id": "662c3192-b95c-41ea-bd7f-598febf40133",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757873190.2234998
+    },
+    {
+        "id": "0ef5bd61-02de-4e3f-ab9c-222e1e388347",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757873213.8218098
+    },
+    {
+        "id": "691a0e38-8391-4eee-b67f-31173c7ff7c7",
+        "command": "get_balance",
+        "params": {},
+        "timestamp": 1757873237.5812218
+    }
+]

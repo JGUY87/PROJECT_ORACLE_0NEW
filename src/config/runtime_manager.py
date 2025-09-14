@@ -123,7 +123,7 @@ class RuntimeManager:
                 df.set_index('timestamp', inplace=True)
 
                 # 2. 신호 생성
-                signals = get_strategy_signals(self.strategy, df)
+                get_strategy_signals(self.strategy, df)
 
                 # 3. TODO: 신호에 따른 주문 실행 로직 구현
                 # 예: if signals.iloc[-1]['signal'] == 1: # 매수 신호

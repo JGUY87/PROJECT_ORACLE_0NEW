@@ -1,0 +1,58 @@
+{
+  "comment": "전략 추천 로직에 사용되는 파라미터",
+  "primary_timeframe": "1m",
+  "strategy_thresholds": {
+    "hukwoonyam": {
+      "ppo_score": 0.80
+    },
+    "wonyotti": {
+      "vol_spike": 1.3,
+      "rsi": 30
+    },
+    "volume_pullback": {
+      "vol_spike": 1.5
+    },
+    "td_mark": {
+      "td_reversal": 1
+    },
+    "smart_money_accumulation": {
+      "support_accumulation": 3
+    },
+    "bollinger_breakout": {
+      "enabled": true
+    }
+  },
+  "action_thresholds": {
+    "hold_conditions": {
+      "momentum_abs": 1e-3,
+      "rsi_min": 45,
+      "rsi_max": 55,
+      "stoch_min": 30,
+      "stoch_max": 70
+    },
+    "scoring": {
+      "buy_golden_cross": 2,
+      "buy_momentum_positive": 1,
+      "buy_rsi_low": 1,
+      "buy_stoch_low": 1,
+      "buy_not_downtrend": 1,
+      "buy_macd_histogram_positive": 1,
+      "sell_dead_cross": 2,
+      "sell_momentum_negative": 1,
+      "sell_rsi_high": 1,
+      "sell_stoch_high": 1,
+      "sell_is_downtrend": 1,
+      "sell_macd_histogram_negative": 1
+    },
+    "decision": {
+      "min_score_for_action": 2,
+      "min_score_difference": 2
+    },
+    "indicators": {
+      "rsi_buy": 35,
+      "rsi_sell": 65,
+      "stoch_buy": 20,
+      "stoch_sell": 80
+    }
+  }
+}

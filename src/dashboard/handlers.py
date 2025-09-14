@@ -12,7 +12,7 @@ from aiogram.types import Message, FSInputFile
 
 from ..engine.manager import TradingEngine
 from ..core import order_helpers
-from ..core.exchange_info import get_balance
+from ..engine.main_realtime import get_balance, get_session
 
 # 라우터 객체 생성
 router = Router(name="main_router")
@@ -186,9 +186,11 @@ async def handle_summary(message: Message):
 @router.message(Command("balance"))
 async def handle_balance(message: Message):
     """거래소 잔고를 조회합니다."""
+    session = None
     try:
+        session = get_session()
         # USDT 잔고 조회 (기본값)
-        balance_info = await get_balance('USDT')
+        balance_info = await get_balance(session, 'USDT')
         
         if balance_info:
             total = balance_info.get('total', 0)
@@ -207,6 +209,9 @@ async def handle_balance(message: Message):
         await message.reply(response_text, parse_mode="Markdown")
     except Exception as e:
         await message.reply(f"❌ 잔고 조회 중 오류 발생: {e}")
+    finally:
+        if session:
+            await session.close()
 
 @router.message(Command("report"))
 async def handle_report(message: Message):

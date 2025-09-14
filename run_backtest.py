@@ -5,8 +5,9 @@
 import asyncio
 import argparse
 import logging
-import os # Added this line
+import os
 from src.backtest.runner import run_ma_crossover_backtest
+from src.notifier.telegram_notifier import send_backtest_results
 
 # 기본 로깅 설정
 logging.basicConfig(
@@ -30,6 +31,12 @@ async def main():
         help="Start date for backtest data (e.g., '2023-01-01')"
     )
     parser.add_argument(
+        "--end_date", 
+        type=str, 
+        default=None, 
+        help="End date for backtest data (e.g., '2024-01-01')"
+    )
+    parser.add_argument(
         "--fast_ma", 
         type=int, 
         default=10, 
@@ -41,17 +48,28 @@ async def main():
         default=30, 
         help="Slow moving average period"
     )
+    parser.add_argument(
+        "--no_telegram",
+        action="store_true",
+        help="Do not send a Telegram notification"
+    )
     
     args = parser.parse_args()
 
-    stats, stats_filename = await run_ma_crossover_backtest(
+    stats, stats_path, plot_path = await run_ma_crossover_backtest(
         symbol=args.symbol,
         start_date=args.start_date,
+        end_date=args.end_date,
         fast_ma=args.fast_ma,
         slow_ma=args.slow_ma
     )
-    if stats_filename:
-        print(stats_filename) # Print the path for the handler to capture
+    if stats_path and plot_path:
+        print(f"Backtest stats saved to: {stats_path}")
+        print(f"Backtest plot saved to: {plot_path}")
+
+        # 텔레그램 알림 보내기
+        if not args.no_telegram:
+            await send_backtest_results(str(stats_path), str(plot_path))
 
 if __name__ == "__main__":
     # Poetry 환경에서 실행될 때 asyncio 이벤트 루프 관련 경고를 방지

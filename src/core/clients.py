@@ -12,7 +12,7 @@ from .bybit_router import get_bybit_client
 # 경고 메시지 한 번만 출력하기 위한 플래그
 _deprecation_warning_logged = False
 
-async def get_exchange_client():
+def get_exchange_client():
     """
     [Deprecated] Bybit 클라이언트를 반환합니다.
     
@@ -26,4 +26,4 @@ async def get_exchange_client():
         )
         _deprecation_warning_logged = True
     
-    return await get_bybit_client()
+    return get_bybit_client()

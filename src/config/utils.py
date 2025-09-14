@@ -119,7 +119,7 @@ def get_telegram_info(idx: int = 0, dotenv_path: Optional[Path] = None, accounts
     if dotenv_path:
         load_dotenv(dotenv_path)
 
-    token_env = os.getenv("TELEGRAM_TOKEN", "")
+    token_env = os.getenv("TELEGRAM_BOT_TOKEN", "")
     chatid_env = os.getenv("TELEGRAM_CHAT_ID", "")
 
     if token_env and chatid_env:

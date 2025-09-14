@@ -3,11 +3,10 @@
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 import logging
 
-# --- 모듈 임포트 --- 
-# core.trader_exit_profiles는 동적 오버라이드를 위해 필요합니다.
+# --- 모듈 임포트 ---
 try:
     from ..core.trader_exit_profiles import PROFILES as EXIT_PROFILES
 except ImportError:
@@ -68,8 +67,57 @@ def _apply_strategy_overrides(overrides: Dict[str, Any]):
         for key, value in params.items():
             if hasattr(profile, key):
                 try:
-                    # 올바른 타입으로 변환 시도
                     original_type = type(getattr(profile, key))
                     setattr(profile, key, original_type(value))
-                except (ValueError, TypeError):
-                    logging.error(f
+                except (ValueError, TypeError) as e:
+                    # 아래 라인이 끊겨서 발생한 오류 수정
+                    logging.error(
+                        f"전략 '{name}'의 파라미터 '{key}' 오버라이드 실패: "
+                        f"값 '{value}'를 타입 '{original_type.__name__}'(으)로 변환할 수 없습니다. 오류: {e}"
+                    )
+
+# --- 메인 로더 함수 (누락된 부분 복원) ---
+def load_all_configs() -> LoadedConfig:
+    """
+    모든 JSON 설정 파일을 로드하고, 오버라이드를 적용한 후,
+    데이터 클래스에 담아 반환합니다.
+    """
+    # 1. 각 설정 파일 로드
+    settings = _read_json(CONFIG_DIR / "settings.json")
+    overrides = _read_json(CONFIG_DIR / "strategy_overrides.json")
+    risk_profiles = _read_json(CONFIG_DIR / "risk_profiles.json")
+    
+    # 2. PretradePolicy 객체 생성
+    pretrade_settings = settings.get("pretrade_policy", {})
+    pretrade_policy = PretradePolicy(**pretrade_settings)
+
+    # 3. 최종 설정 객체 생성
+    loaded_config = LoadedConfig(
+        settings=settings,
+        overrides=overrides,
+        risk_profiles=risk_profiles,
+        pretrade=pretrade_policy,
+    )
+    
+    # 4. 동적 오버라이드 적용
+    _apply_strategy_overrides(overrides)
+    
+    logging.info("모든 설정 로드가 완료되었습니다.")
+    return loaded_config
+
+# --- 사용 예시 ---
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    final_configs = load_all_configs()
+    
+    print("\n--- Loaded Settings ---")
+    print(final_configs.settings)
+    
+    print("\n--- Loaded Overrides ---")
+    print(final_configs.overrides)
+    
+    print("\n--- Loaded Risk Profiles ---")
+    print(final_configs.risk_profiles)
+    
+    print("\n--- Pretrade Policy ---")
+    print(final_configs.pretrade)
